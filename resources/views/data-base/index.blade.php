@@ -37,7 +37,7 @@
 
 
 <div class="table-responsive-sm me-1 mt-2" data-bs-spy="scroll" data-bs-offset="1" tabindex="0">
-<table class="table table-sm table-dark table-hover ms-1 mt-0 pt-0" id="contaTable">
+<table class="table table-sm table-hover ms-1 mt-0 pt-0" id="contaTable">
     <thead>
     <tr>
         <th scope="col-1">#</th>
