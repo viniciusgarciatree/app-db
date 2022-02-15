@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataBase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DataBaseController extends Controller
 {
@@ -14,7 +15,7 @@ class DataBaseController extends Controller
      */
     public function index()
     {
-        $data = DataBase::latest()->paginate(10);
+        $data = DB::table('data_base')->orderBy('descricao', 'asc')->paginate(10);
 
         return view('data-base.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -120,5 +121,10 @@ class DataBaseController extends Controller
         return view('data-base.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5)
             ->with('success','Post deleted successfully');
+    }
+
+    public function search(Request $request)
+    {
+
     }
 }

@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class UserDataBaseController extends Controller
 {
+
+    private $objUserDataBase;
+    private $entUserDataBase;
+
+    public function __construct(UserDataBase $objUserDataBase){
+        $this->objUserDataBase = $objUserDataBase;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,20 +22,7 @@ class UserDataBaseController extends Controller
      */
     public function index()
     {
-        $data = UserDataBase::latest()->paginate(10);
-
-        return view('user-data-base.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->paginacao();
     }
 
     /**
@@ -38,23 +33,11 @@ class UserDataBaseController extends Controller
      */
     public function store(Request $request)
     {
-        self::
+        $this->valida($request);
 
-        UserDataBase::create($request->all());
+        $this->objUserDataBase::create($request->all());
 
-        return redirect()->route('user-data-base.index')
-                        ->with('success','Post created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->paginacao();
     }
 
     /**
@@ -65,11 +48,8 @@ class UserDataBaseController extends Controller
      */
     public function edit($id)
     {
-        $dataBase = UserDataBase::find($id);
-        $data = UserDataBase::latest()->paginate(10);
-
-        return view('user-data-base.index',compact('data', 'userDataBase'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $this->entUserDataBase = $this->objUserDataBase::find($id);
+        return $this->paginacao();
     }
 
     /**
@@ -81,22 +61,11 @@ class UserDataBaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'descricao' => 'required',
-            'host' => 'required',
-            'port' => 'required',
-            'base' => 'required',
-        ]);
+        $this->valida($request);
 
-        $userDataBase = UserDataBase::find($id);
+        ($this->objUserDataBase::find($id))->update($request->all());
 
-        $userDataBase->update($request->all());
-
-        $data = UserDataBase::latest()->paginate(10);
-
-        return view('user-data-base.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5)
-            ->with('success','Post updated successfully');
+        return $this->paginacao();
     }
 
     /**
@@ -107,21 +76,30 @@ class UserDataBaseController extends Controller
      */
     public function destroy($id)
     {
-        $userDataBase = UserDataBase::find($id);
-        $userDataBase->delete();
-
-        $data = UserDataBase::latest()->paginate(10);
-
-        return view('user-data-base.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5)
-            ->with('success','Post deleted successfully');
+        ($this->objUserDataBase::find($id))->delete();
+        return $this->paginacao();
     }
 
+    /**
+     * Faz validação do request
+     */
     protected function valida(Request $request)
     {
         $request->validate([
             'nome' => 'required',
             'senha' => 'required'
         ]);
+    }
+
+    /**
+     * Paginação da aplicação
+     * @return \Illuminate\Http\Response
+     */
+    protected function paginacao()
+    {
+        $entUserDataBase = $this->entUserDataBase;
+        $data = UserDataBase::latest()->paginate(10);
+        return view('user-data-base.index',compact('data', 'entUserDataBase'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

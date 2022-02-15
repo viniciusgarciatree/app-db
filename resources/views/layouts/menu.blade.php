@@ -24,6 +24,20 @@
                                 Data Bases
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('/user-data-base') }}" class="nav-link text-secondary">
+                            <i class="bi bi-hdd-stack-fill"></i>
+                                Users Data Base
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown10">
+                            <li><a href="{{ url('/tools/compare-data-base') }}" class="dropdown-item btn btn-sm btn btn-outline-dark m-1"><i class="bi bi-arrow-left-right"></i> Compare data bases</a></li>
+                            <li><a href="{{ url('/tools/integridade-campo') }}" class="dropdown-item btn btn-sm btn btn-outline-dark m-1"><i class="bi bi-arrow-left-right"></i> Verificar integridade campo</a></li>
+                            <li><a href="{{ url('/tools/load-data-base') }}" class="dropdown-item btn btn-sm btn btn-outline-dark m-1"><i class="bi bi-arrow-clockwise"></i> Load data bases</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -13,9 +13,10 @@ class DataBase{
     private $user     = "root";
     private $password = "123";
     private $db       = "teste";
+    private $conexao;
 
     /*Método construtor do banco de dados*/
-    public function __construct($host, $user = null, $password = null, $db){
+    public function __construct($host, $user = null, $password = null, $db = null){
         $this->dbtype = 'mysql';
         $this->host = $host;
         $this->port = 3306;

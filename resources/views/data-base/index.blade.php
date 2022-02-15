@@ -17,20 +17,22 @@
         <form action="{{ route('data-base.store') }}" method="POST" class="row g-1">
             @csrf
     @endif
-        <div class="col-3 me-1">
+        <div class="col-3">
             <input type="text" name="descricao" value="{{ isset($dataBase->descricao) ? $dataBase->descricao : "" }}" class="form-control form-control-sm" placeholder="Descrição:">
         </div>
-        <div class="col-3 me-1">
+        <div class="col-3">
             <input type="text" name="host" value="{{ isset($dataBase->host) ? $dataBase->host : "" }}"" class="form-control form-control-sm" placeholder="Host Name:">
         </div>
-        <div class="col-1 me-1">
-            <input type="text" name="port" value="{{ isset($dataBase->port) ? $dataBase->port : "" }}"" class="form-control form-control-sm" placeholder="Porta:">
+        <div class="col-1">
+            <input type="text" name="port" value="{{ isset($dataBase->port) ? $dataBase->port : "3306" }}"" class="form-control form-control-sm" placeholder="Porta:">
         </div>
-        <div class="col-3 me-1">
+        <div class="col-3">
             <input type="text" name="base" value="{{ isset($dataBase->base) ? $dataBase->base : "" }}"" class="form-control form-control-sm" placeholder="Data Base:">
         </div>
         <div class="col-1">
-            <button type="submit" class="btn btn-outline-success btn-sm col-12">Adicionar/Salvar</button>
+        <button type="submit" class="btn btn-outline-success btn-sm" 
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar / Salvar"
+            > <i class="bi bi-plus-lg"></i> / <i class="bi bi-save"></i></button>
         </div>
     </form>
 </div>
@@ -51,17 +53,21 @@
     <tbody>
     @foreach ($data as $key => $value)
     <tr>
-        <td class="col-1">{{ $key }}</td>
+        <td class="col-1">{{ $value->id }}</td>
         <td class="col-3">{{ $value->descricao }}</td>
         <td class="col-2">{{ $value->host }}</td>
         <td class="col-1">{{ $value->port }}</td>
         <td class="col-2">{{ $value->base }}</td>
         <td class="col-1">
             <form action="{{ route('data-base.destroy',$value->id) }}" method="POST">
-                <a class="btn btn-primary btn-sm" href="{{ route('data-base.edit',$value->id) }}">Edit</a>
+                <a class="btn btn-outline-primary btn-sm" href="{{ route('data-base.edit',$value->id) }}"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"
+                ><i class="bi bi-pencil-square"></i></a>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <button type="submit" class="btn btn-outline-danger btn-sm"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Remover"
+                ><i class="bi bi-trash"></i></button>
             </form>
         </td>
     </tr>    
