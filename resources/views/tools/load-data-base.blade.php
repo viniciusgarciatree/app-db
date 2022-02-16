@@ -182,6 +182,10 @@
                     success: function (data) {
                         alertify.success('Dados Salvos com successo!');
                     },
+                    error: function (erro) {
+                        alertify.erro(":( Erro ao salvar!");
+                        console.log(erro);
+                    }
                 });
             });
         });

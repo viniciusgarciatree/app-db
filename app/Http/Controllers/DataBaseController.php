@@ -15,7 +15,7 @@ class DataBaseController extends Controller
      */
     public function index()
     {
-        $data = DB::table('data_base')->orderBy('descricao', 'asc')->paginate(10);
+        $data = DB::table('data_base')->orderBy('descricao', 'asc')->paginate(100);
 
         return view('data-base.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

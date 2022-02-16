@@ -23,7 +23,11 @@
             <select class="form-select" id="basePrincipal" aria-label="Selecione a base principal de comparação:">
                 <option value="-1" selected>Selecione uma base de dados com principio de compração:</option>
                 @foreach ($objDataBases as $dataBase)
-                    <option value="{{ $dataBase->id }}">{{ $dataBase->descricao }}: {{ $dataBase->base }}</option>    
+                    @if( $dataBase->descricao == $dataBase->base)
+                        <option value="{{ $dataBase->id }}">{{ $dataBase->base }}</option>
+                    @else
+                        <option value="{{ $dataBase->id }}">{{ $dataBase->descricao }} -> {{ $dataBase->base }}</option>
+                    @endif                    
                 @endforeach
             </select>
         </div>
@@ -43,7 +47,11 @@
                         <div class="form-check m-0 ms-1">
                             <input class="form-check-input databases" id="dbCompare-{{ $dataBase->id }}" type="checkbox" value="{{ $dataBase->id }}">
                             <label class="form-check-label" for="nomeDataBase">
-                            {{ $dataBase->descricao }}: {{ $dataBase->base }}
+                                @if( $dataBase->descricao == $dataBase->base)
+                                    {{ $dataBase->base }}
+                                @else
+                                    {{ $dataBase->descricao }} -> {{ $dataBase->base }}
+                                @endif
                             </label>
                         </div>
                     </li>
