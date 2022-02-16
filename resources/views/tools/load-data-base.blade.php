@@ -82,7 +82,7 @@
 
 @push('scripts')
     <script type="text/javascript">
-        $( document ).ready(function() {
+        $( document ).ready(function() {        
 
             $.ajaxSetup({
                 headers: {
@@ -180,7 +180,7 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        // execução em caso de sucesso
+                        alertify.success('Dados Salvos com successo!');
                     },
                 });
             });

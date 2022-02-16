@@ -32,7 +32,7 @@ class TooslController extends Controller
         if ($request->ajax()) {
             $data = $request->all();
             foreach($data['bases'] as $value){
-                $dataBase = DataBase::firstOrCreate([
+                $dataBase = DataBase::firstOrNew([
                     'host' => $data['host'],
                     'port' => $data['port'],
                     'base' => $value['base']
@@ -42,7 +42,7 @@ class TooslController extends Controller
                 $dataBase->save();
             }
 
-            $userDataBase = UserDataBase::firstOrCreate([
+            $userDataBase = UserDataBase::firstOrNew([
                 'nome' => $data['nome'],
                 'senha' => $data['senha']
             ]);

@@ -21,6 +21,10 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('bootstrap-select/css/bootstrap-select.min.css') }}">
 
+    <!-- alertifyjs -->
+    <link rel="stylesheet" href="{{ asset('alertifyjs/css/alertify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('alertifyjs/css/themes/bootstrap.min.css') }}">
+
 
     @stack('css')
     <style>
@@ -54,6 +58,15 @@
 
 <script src="{{ asset('select2-4.1.0/dist/js/select2.full.min.js') }}" ></script>
 <script src="{{ asset('select2-4.1.0/dist/js/i18n/pt-BR.js') }}" ></script>
+
+<!-- alertifyjs -->
+<script src="{{ asset('alertifyjs/alertify.min.js') }}" ></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        alertify.set('notifier','position', 'top-right');
+    });
+</script>
 
 @stack('scripts')
 
